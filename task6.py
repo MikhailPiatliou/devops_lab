@@ -1,5 +1,5 @@
-import re
 import operator
+import re
 
 line = input("Enter your operation: ")
 if len(line) > 100 or len(line) == 0:
