@@ -5,8 +5,8 @@ line = input("Enter your operation: ")
 if len(line) > 100 or len(line) == 0:
     print("Out of range")
     exit(1)
-matchObj = re.match(r'(-?)([0-9]{1,5})(\*|\/|\+)?(-)?(?(4)|(-)?)([0-9]{1,5})='
-                    r'(-?)([0-9]{1,5})', line, re.M | re.I)
+matchObj = re.match(r'(-?)([0-9]{1,5})(\*|\/|\+)?(-)?(?(4)|(-)?)([0-9]{1,5})'
+                    r'=(-?)([0-9]{1,5})', line, re.M | re.I)
 if matchObj:
     if matchObj.group(1) is not None:
         first = matchObj.group(1) + matchObj.group(2)
