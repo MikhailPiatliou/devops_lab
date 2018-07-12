@@ -19,17 +19,17 @@ while True:
         strftime("%Y-%m-%d %H:%M:%S")
 
     if conf.output == "txt":
-        print("SNAPSHOT " + str(count) + "\n"
-              + "Time: " + ts + "\n"
-              + "CPU load: " + cpu + "\n"
-              + "Disk usage: " + dused + "\n"
-              + "Free disk space: " + dfree + "\n"
-              + "Memory usage: " + vmused + "\n"
-              + "Free memory: " + vmfree + "\n"
-              + "Read operations: " + ioread + "\n"
-              + "Write operations: " + iowrite + "\n"
-              + "Sent bytes: " + netsent + "\n"
-              + "Received bytes: " + netrcvd + "\n",
+        print("SNAPSHOT " + str(count) + "\n" +
+              "Time: " + ts + "\n" +
+              "CPU load: " + cpu + "\n" +
+              "Disk usage: " + dused + "\n" +
+              "Free disk space: " + dfree + "\n" +
+              "Memory usage: " + vmused + "\n" +
+              "Free memory: " + vmfree + "\n" +
+              "Read operations: " + ioread + "\n" +
+              "Write operations: " + iowrite + "\n" +
+              "Sent bytes: " + netsent + "\n" +
+              "Received bytes: " + netrcvd + "\n",
               file=open("log.txt", "a")
               )
         time.sleep(conf.interval)
