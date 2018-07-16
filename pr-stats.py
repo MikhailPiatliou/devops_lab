@@ -30,7 +30,6 @@ def get_opt():
     args = parser.parse_args().__dict__
     args["login"] = input("Username: ")
     args["password"] = getpass.getpass()
-
     res = requests.get("https://api.github.com/repos/%s/%s/pulls?page="
                        "1&per_page=100" % (args["user"], args["repo"]),
                        auth=(args["login"], args["password"])).json()
@@ -40,31 +39,26 @@ def get_opt():
 def number(res):
     now = datetime.datetime.now().date()
     for i in res:
-        title = i["title"]
-        date_str = i["created_at"]
-        date = datetime.datetime.strptime(date_str,
+        date = datetime.datetime.strptime(i["created_at"],
                                           "%Y-%m-%dT%H:%M:%SZ").date()
         dif = now - date
         print("Pull request with title {0} is opened {1} days".format
-              (title, dif.days))
+              (i["title"], dif.days))
 
 
 def opened_day(res):
     for i in res:
-        title = i["title"]
         date = datetime.datetime.strptime(i["created_at"],
                                           "%Y-%m-%dT%H:%M:%SZ")
         day = calendar.day_name[date.weekday()]
         print("Pull request with title {0} was opened on {1}".format
-              (title, day))
+              (i["title"], day))
 
 
 def user_open(res):
     for i in res:
-        name = i["user"]["login"]
-        title = i["title"]
         print("Pull Request with title {0} was opened by "
-              "user {1}".format(title, name))
+              "user {1}".format(i["title"], i["user"]["login"]))
 
 
 def line_add(args, res):
@@ -73,8 +67,7 @@ def line_add(args, res):
         resadd = requests.get("https://api.github.com/repos/%s/%s/pulls"
                               "/%s?page=1&per_page=100" %
                               (args["user"], args["repo"], num),
-                              auth=(args["login"], args["password"]))
-        resadd = resadd.json()
+                              auth=(args["login"], args["password"])).json()
         print("Number of lines added with title {0}: {1}".format
               (i["title"], resadd["additions"]))
 
@@ -85,8 +78,7 @@ def line_del(args, res):
         resdel = requests.get("https://api.github.com/repos/%s/%s/pulls"
                               "/%s?page=1&per_page=100" %
                               (args["user"], args["repo"], num),
-                              auth=(args["login"], args["password"]))
-        resdel = resdel.json()
+                              auth=(args["login"], args["password"])).json()
         print("Number of lines deleted with title {0}: {1}".format
               (i["title"], resdel["deletions"]))
 
